@@ -1,0 +1,211 @@
+{% extends 'user/menu.html' %}
+{% block footer %}
+    <div class="container">
+        <p></p>
+            <h2 class="text-center text-info">Nhập Bảng Điểm</h2>
+            {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+
+
+                    {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+            {% endwith %}
+            <p></p>
+            <form action="/nhapdiem" method="POST">
+
+
+               <div class="form-group">
+
+                  <label>Điểm 15 phút lần 1 kỳ 1:</label>
+                  <input type="text" class="form-control" name="t1" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+                  <label>Điểm 15 phút lần 2 kỳ 1:</label>
+                  <input type="text" class="form-control" name="t2" required="1">
+
+
+               </div>
+
+
+				<div class="form-group">
+
+
+                  <label>Điểm 15 phút lần 3 kỳ 1:</label>
+                  <input type="text" class="form-control" name="t3" required="1">
+
+
+               </div>
+
+
+				<div class="form-group">
+
+
+                  <label>Điểm 1 tiết lần 1 kỳ 1:</label>
+                  <input type="text" class="form-control" name="x1" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Điểm 1 tiết lần 2 kỳ 1:</label>
+                  <input type="text" class="form-control" name="x2" required="1">
+
+
+               </div>
+
+                <div class="form-group">
+
+
+                  <label>Điểm kiểm tra cuối kỳ 1:</label>
+                  <input type="text" class="form-control" name="k1" required="1">
+
+
+               </div>
+
+                 <div class="form-group">
+
+                  <label>Điểm 15 phút lần 1 kỳ 2:</label>
+                  <input type="text" class="form-control" name="t4" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+                  <label>Điểm 15 phút lần 2 kỳ 2:</label>
+                  <input type="text" class="form-control" name="t5" required="1">
+
+
+               </div>
+
+
+				<div class="form-group">
+
+
+                  <label>Điểm 15 phút lần 3 kỳ 2:</label>
+                  <input type="text" class="form-control" name="t6" required="1">
+
+
+               </div>
+
+
+				<div class="form-group">
+
+
+                  <label>Điểm 1 tiết lần 1 kỳ 2:</label>
+                  <input type="text" class="form-control" name="x3" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Điểm 1 tiết lần 2 kỳ 2:</label>
+                  <input type="text" class="form-control" name="x4" required="1">
+
+
+               </div>
+
+                <div class="form-group">
+
+
+                  <label>Điểm kiểm tra cuối kỳ 2:</label>
+                  <input type="text" class="form-control" name="k2" required="1">
+
+
+               </div>
+
+                <div class="form-group">
+
+
+                  <label>Điểm Trung Bình Kỳ 1:</label>
+                  <input type="text" class="form-control" name="p1" required="1">
+
+
+               </div>
+
+                <div class="form-group">
+
+
+                  <label>Điểm Trung Bình Kỳ 2:</label>
+                  <input type="text" class="form-control" name="p2" required="1">
+
+
+               </div>
+
+                 <div class="form-group">
+
+
+                  <label>Điểm Trung Bình Cả Năm:</label>
+                  <input type="text" class="form-control" name="e" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+                <label>Học Sinh</label>
+                <select class="form-control" name="namehs">
+                    {% for cat in HocSinh %}
+                    <option value="{{ cat.id }}" >{{ cat.firstname }} {{ cat.lastname }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+
+                <div class="form-group">
+                <label>Môn</label>
+                <select class="form-control" name="namemon">
+                    {% for cat in MonHoc %}
+                    <option value="{{ cat.id }}" >{{ cat.name }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Nhập Điểm</button>
+
+
+               </div>
+
+
+
+
+
+            </form>
+
+
+    </div>
+
+{% endblock %}

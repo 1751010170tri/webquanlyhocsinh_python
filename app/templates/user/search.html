@@ -1,0 +1,90 @@
+{% extends 'base_client.html'%}
+{% block footer %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/mark.css')}}">
+<div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <span class="page-title"><h4>Danh sách học sinh</h4></span>
+                </div>
+            </div>
+            <form action="{{ url_for('GetStudentList')}}" style="text-align: right">
+            <div>
+                <div class="form-group" style="display: inline-block">
+                    <label>Tên học sinh: </label>
+                    <label>
+                        <input class="form-control" type="text" name="keyword" placeholder="Nhập từ khóa cần tìm..." />
+                    </label>
+                </div>
+
+                <div class="form-group" style="display: inline">
+                    <label>Lớp: </label>
+                    <label>
+                        <select class="form-control" name="classname">
+                            <option></option>
+                            {% for class_ in classes %}
+                            <option  value="{{class_.class_id}}">{{class_.grade}}{{class_.class_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+                <div class="form-group" style="display: inline-block">
+                    <label>
+                        <input type="submit" value="Tìm" class="btn-change3 text-center" style="width: 50px; height: 30px; margin-left: 10%; border-radius: 10%"/>
+                    </label>
+
+                </div>
+
+            </div>
+            </form>
+
+            <div>
+                    <div class="content-block table">
+                        <div class="block-content">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="col-lg-2">STT</th>
+                                        <th class="col-lg-2">Họ Tên</th>
+                                        <th class="col-lg-2">Lớp</th>
+                                        <th class="col-lg-2">Điểm Trung Bình học kì 1</th>
+                                        <th class="col-lg-2">Điểm Trung Bình học kì 2</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            {% for student in student_list %}
+
+                                    <tr>
+                                        <th><button onclick="ViewDetailProfile({{student.student_id}})" type="submit" class="btn-change3 text-center">{{student.student_id}} - <i class="fas fa-eye"></i></button></th>
+                                        <td>{{student.student_name}}</td>
+                                        <td>{{student.class}}</td>
+                                        {% for gpa in gpas %}
+                                            {% if gpa.student_id == student.student_id and gpa.semester_id == 1 %}
+                                            <td class="text-center">{{gpa.mark_gpa}}</td>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% for gpa in gpas %}
+                                            {% if gpa.student_id == student.student_id and gpa.semester_id == 2%}
+                                                <td class="text-center">{{gpa.mark_gpa}}</td>
+                                           {% endif %}
+                                        {% endfor %}
+
+
+
+
+                                    </tr>
+
+                               {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+    <script>
+        function ViewDetailProfile(student_id) {
+          window.location.href = '/student-profile/'+ student_id
+        }
+    </script>
+
+</div>
+{% endblock %}
